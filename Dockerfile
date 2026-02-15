@@ -11,7 +11,3 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 4. Copy the rest of your application code
 COPY . .
-
-# 5. Set the entrypoint to your script
-# This allows the container to act like a command-line tool
-RUN flake8 .

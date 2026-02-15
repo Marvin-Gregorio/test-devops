@@ -12,5 +12,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Build and Run Linter
-        run: docker build -t linter-check .
+      - name: Start Services
+        run: docker compose up -d
+
+      - name: Check linter status
+        run: docker compose up --exit-code-from linter linter
+
+      - name: Stop and Cleanup
+        if: always()
+        run: docker compose down
