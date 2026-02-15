@@ -1,0 +1,14 @@
+name: Python Linting Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  run-linter:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build and Run Linter
+        run: docker build -t linter-check .
