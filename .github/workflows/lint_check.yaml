@@ -1,0 +1,23 @@
+name: Python Linting Pipeline
+
+on:
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  run-linter:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Start Services
+        run: docker compose up -d
+
+      - name: Check linter status
+        run: docker compose up --exit-code-from linter linter
+
+      - name: Stop and Cleanup
+        if: always()
+        run: docker compose down

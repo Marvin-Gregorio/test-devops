@@ -1,0 +1,28 @@
+services:
+  postgres-db:
+    container_name: postgres-db
+    image: postgres:16.12-bookworm
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  web:
+    container_name: nginx-web
+    image: nginx:1.29.5
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres-db
+
+  linter:
+    container_name: python-app-linter
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: linter-build
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: flake8 .
