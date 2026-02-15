@@ -3,7 +3,7 @@ from time import time
 import argparse
 
 
-def cleanup_old_logs(directory, days=30, dry_run=True):
+def cleanup_old_logs(directory, days=30, dry_run = True):
     now = time()
     seconds_in_a_day = 60 * 60 * 24
     seconds = days * seconds_in_a_day
